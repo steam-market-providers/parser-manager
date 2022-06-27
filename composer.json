@@ -1,0 +1,28 @@
+{
+    "name": "krepysh-spec/steam-market-parser",
+    "type": "library",
+    "description": "World Currency list in PHP constants and array",
+    "keywords": ["steam", "steam-market", "csgo", "dota2", "steam-parser", "parser"],
+    "require-dev": {
+        "phpunit/phpunit": "10.0.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "KrepyshSpec\\SteamMarketParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Evgeniy Mykhalichenko",
+            "email": "evgeniymykhalichenko@gmail.com",
+            "homepage": "https://github.com/krepysh-spec"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0"
+    },
+    "scripts": {
+    }
+}
