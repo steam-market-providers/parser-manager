@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KrepyshSpec\SteamMarketParser;
 
-use KrepyshSpec\SteamMarketParser\Enum\SteamCurrency;
+use KrepyshSpec\SteamEnums\SteamApp;
 
 class Steam
 {
     public function __construct()
     {
-        echo SteamCurrency::USD->value;
+        echo SteamApp::CSGO->value;
     }
 }
