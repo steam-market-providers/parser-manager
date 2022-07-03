@@ -1,4 +1,4 @@
-# Steam market parser CS:GO
+# Steam market parser
 
 ### Install
 ```bash
