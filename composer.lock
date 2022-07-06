@@ -331,16 +331,16 @@
         },
         {
             "name": "krepysh-spec/steam-enums",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/krepysh-spec/steam-enums.git",
-                "reference": "90b593d16606c51814e81eb212486cd289514f86"
+                "reference": "a20e4ddf19145cc15a11d2ab135536bad222be96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/krepysh-spec/steam-enums/zipball/90b593d16606c51814e81eb212486cd289514f86",
-                "reference": "90b593d16606c51814e81eb212486cd289514f86",
+                "url": "https://api.github.com/repos/krepysh-spec/steam-enums/zipball/a20e4ddf19145cc15a11d2ab135536bad222be96",
+                "reference": "a20e4ddf19145cc15a11d2ab135536bad222be96",
                 "shasum": ""
             },
             "require": {
@@ -384,9 +384,9 @@
             ],
             "support": {
                 "issues": "https://github.com/krepysh-spec/steam-enums/issues",
-                "source": "https://github.com/krepysh-spec/steam-enums/tree/1.0.0"
+                "source": "https://github.com/krepysh-spec/steam-enums/tree/1.0.1"
             },
-            "time": "2022-07-03T13:19:45+00:00"
+            "time": "2022-07-06T17:35:49+00:00"
         },
         {
             "name": "psr/http-client",

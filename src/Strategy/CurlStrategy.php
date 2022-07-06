@@ -9,6 +9,9 @@ use KrepyshSpec\SteamMarketParser\Interface\StrategyInterface;
 
 class CurlStrategy implements StrategyInterface
 {
+    /**
+     * @var false|CurlHandle
+     */
     private false|CurlHandle $ch;
 
     public function __construct()
