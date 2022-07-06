@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KrepyshSpec\SteamMarketParser;
 
-use KrepyshSpec\SteamMarketParser\Interfaces\FactoryInterface;
+use KrepyshSpec\SteamMarketParser\Interface\FactoryInterface;
 
 final class SteamParserFactory implements FactoryInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Interfaces;
+namespace KrepyshSpec\SteamMarketParser\Interface;
 
 use KrepyshSpec\SteamMarketParser\SteamParser;
 
