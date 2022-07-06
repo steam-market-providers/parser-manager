@@ -6,5 +6,5 @@ namespace KrepyshSpec\SteamMarketParser\Interface;
 
 interface StrategyInterface
 {
-    public function sendRequest(string $url);
+    public function sendRequest(string $url): string;
 }

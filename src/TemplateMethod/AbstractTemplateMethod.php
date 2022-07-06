@@ -4,32 +4,26 @@ declare(strict_types=1);
 
 namespace KrepyshSpec\SteamMarketParser\TemplateMethod;
 
-use KrepyshSpec\SteamEnums\SteamLanguage;
 use KrepyshSpec\SteamMarketParser\Builder\SearchUrlBuilder;
 use KrepyshSpec\SteamMarketParser\Interface\StrategyInterface;
 
 abstract class AbstractTemplateMethod
 {
-    public function __construct(private StrategyInterface $strategy)
+    public function __construct(readonly private StrategyInterface $strategy)
     {
 
     }
 
     final public function start(int $page)
     {
-        $url =  (new SearchUrlBuilder())
-            ->setAppId($this->getAppId())
-            ->setPage($page)
-            ->setLanguage(SteamLanguage::Russian)
-            ->build();
+        $url = $this->createUrl($page);
+        $parseRules = $this->createParseRules();
 
-        echo $url . PHP_EOL;die();
+        $html = $this->strategy->sendRequest($url->build());
 
-        $response = $this->strategy->sendRequest($url);
-        print_r($response);
-        echo $this->prepareRequest();
+
     }
 
-    abstract protected function getAppId(): int;
-    abstract protected function prepareRequest();
+    abstract protected function createUrl(int $page): SearchUrlBuilder;
+    abstract protected function createParseRules();
 }

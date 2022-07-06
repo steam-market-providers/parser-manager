@@ -6,5 +6,5 @@ namespace KrepyshSpec\SteamMarketParser\Interface;
 
 interface TemplateMethodInterface
 {
-    public function getAppId(): int;
+
 }
