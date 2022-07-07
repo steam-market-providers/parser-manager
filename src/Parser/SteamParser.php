@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Parser;
 
-use SteamMarketProviders\ParserManager\TemplateMethod\AbstractProvider;
+use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
+use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
+use SteamMarketProviders\ParserManager\Parser\Provider\AbstractProvider;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 
 final class SteamParser
 {
-    private null|StrategyInterface $strategy;
-    private null|AbstractProvider $abstractProvider;
+    private null|StrategyInterface $strategy = null;
+    private ParseRulesBuilder $parseRulesBuilder;
+    private UrlBuilderInterface $urlBuilder;
+
+    public function __construct(private AbstractProvider $abstractProvider)
+    {
+
+    }
 
     /**
      * @param StrategyInterface $strategy
@@ -23,17 +31,11 @@ final class SteamParser
     }
 
     /**
-     * @return StrategyInterface
+     * @return StrategyInterface|null
      */
-    public function getStrategy(): StrategyInterface
+    public function getStrategy(): null|StrategyInterface
     {
         return $this->strategy;
-    }
-    
-    public function setProvider(AbstractProvider $abstractProvider): SteamParser
-    {
-        $this->abstractProvider = new $abstractProvider($this->getStrategy());
-        return $this;
     }
 
     /**
@@ -42,6 +44,12 @@ final class SteamParser
     public function getProvider(): null|AbstractProvider
     {
         return $this->abstractProvider;
+    }
+
+    public function setParseRules(ParseRulesBuilder $parseRulesBuilder): SteamParser
+    {
+        $this->parseRulesBuilder = $parseRulesBuilder;
+        return $this;
     }
 
     /**
