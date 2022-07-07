@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Interface;
+namespace KrepyshSpec\SteamMarketParser\Contract;
 
+use KrepyshSpec\SteamEnums\SteamApp;
 use KrepyshSpec\SteamEnums\SteamLanguage;
 
 interface UrlBuilderInterface
 {
-    public function setAppId(int $appId): UrlBuilderInterface;
+    public function setAppId(SteamApp $steamApp): UrlBuilderInterface;
 
     public function setLanguage(SteamLanguage $steamLanguage = SteamLanguage::English): UrlBuilderInterface;
 

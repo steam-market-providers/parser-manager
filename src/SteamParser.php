@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace KrepyshSpec\SteamMarketParser;
 
 use KrepyshSpec\SteamMarketParser\TemplateMethod\AbstractTemplateMethod;
-use KrepyshSpec\SteamMarketParser\Interface\StrategyInterface;
+use KrepyshSpec\SteamMarketParser\Contract\StrategyInterface;
 
 final class SteamParser
 {
-    private StrategyInterface $strategy;
+    private null|StrategyInterface $strategy;
     private null|AbstractTemplateMethod $templateMethod;
 
     /**
@@ -31,12 +31,12 @@ final class SteamParser
     }
 
     /**
-     * @param string $templateMethod
+     * @param AbstractTemplateMethod $abstractTemplateMethod
      * @return $this
      */
-    public function setTemplateMethod(string $templateMethod): SteamParser
+    public function setTemplateMethod(AbstractTemplateMethod $abstractTemplateMethod): SteamParser
     {
-        $this->templateMethod = new $templateMethod($this->getStrategy());
+        $this->templateMethod = new $abstractTemplateMethod($this->getStrategy());
         return $this;
     }
 
