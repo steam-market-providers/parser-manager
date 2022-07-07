@@ -6,13 +6,13 @@ use KrepyshSpec\SteamEnums\SteamLanguage;
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Builder\SearchUrlBuilder;
 use SteamMarketProviders\ParserManager\Http\HttpOptions;
+use SteamMarketProviders\ParserManager\Parser\Provider\AbstractProvider;
 use SteamMarketProviders\ParserManager\SteamParserFactory;
 use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
-use SteamMarketProviders\ParserManager\TemplateMethod\AbstractTemplateMethod;
 
 require_once __DIR__  . '/../vendor/autoload.php';
 
-class CsGO extends AbstractTemplateMethod
+class CsGOProvider extends AbstractProvider
 {
     protected function createUrl(int $page): SearchUrlBuilder
     {
@@ -41,5 +41,5 @@ SteamParserFactory::create()
             ->setUserAgent('Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1')
             ->setTimeout(10)
     ))
-    ->setTemplateMethod(new CsGO())
+    ->setProvider(abstractProvider: new CsGOProvider())
     ->run();

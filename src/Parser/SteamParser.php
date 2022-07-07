@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SteamMarketProviders\ParserManager;
+namespace SteamMarketProviders\ParserManager\Parser;
 
-use SteamMarketProviders\ParserManager\TemplateMethod\AbstractTemplateMethod;
+use SteamMarketProviders\ParserManager\TemplateMethod\AbstractProvider;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 
 final class SteamParser
 {
     private null|StrategyInterface $strategy;
-    private null|AbstractTemplateMethod $templateMethod;
+    private null|AbstractProvider $abstractProvider;
 
     /**
      * @param StrategyInterface $strategy
@@ -29,23 +29,19 @@ final class SteamParser
     {
         return $this->strategy;
     }
-
-    /**
-     * @param AbstractTemplateMethod $abstractTemplateMethod
-     * @return $this
-     */
-    public function setTemplateMethod(AbstractTemplateMethod $abstractTemplateMethod): SteamParser
+    
+    public function setProvider(AbstractProvider $abstractProvider): SteamParser
     {
-        $this->templateMethod = new $abstractTemplateMethod($this->getStrategy());
+        $this->abstractProvider = new $abstractProvider($this->getStrategy());
         return $this;
     }
 
     /**
-     * @return AbstractTemplateMethod|null
+     * @return AbstractProvider|null
      */
-    public function getTemplateMethod(): null|AbstractTemplateMethod
+    public function getProvider(): null|AbstractProvider
     {
-        return $this->templateMethod;
+        return $this->abstractProvider;
     }
 
     /**
@@ -54,6 +50,6 @@ final class SteamParser
      */
     public function run(int $page = 1)
     {
-        return $this->templateMethod->start($page);
+        return $this->abstractProvider->start($page);
     }
 }

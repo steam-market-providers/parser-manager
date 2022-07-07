@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Contract;
 
-use SteamMarketProviders\ParserManager\SteamParser;
+use SteamMarketProviders\ParserManager\Parser\SteamParser;
 
 interface FactoryInterface
 {

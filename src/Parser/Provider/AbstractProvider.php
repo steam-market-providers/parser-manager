@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SteamMarketProviders\ParserManager\TemplateMethod;
+namespace SteamMarketProviders\ParserManager\Parser\Provider;
 
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Builder\SearchUrlBuilder;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
 
-abstract class AbstractTemplateMethod
+abstract class AbstractProvider
 {
     public function __construct(private null|StrategyInterface $strategy = null)
     {
@@ -22,6 +22,7 @@ abstract class AbstractTemplateMethod
     {
         $url = $this->createUrl($page);
         $parseRules = $this->createParseRules();
+        print_r(1);
 
         $html = $this->strategy->sendRequest($url->build());
 

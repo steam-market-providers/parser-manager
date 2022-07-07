@@ -1,5 +1,4 @@
 # Steam parser manager provider
-[![CircleCI Build](http://poser.pugx.org/steam-market-providers/parser-manager/circleci)](https://packagist.org/packages/steam-market-providers/parser-manager)
 [![Latest Stable Version](http://poser.pugx.org/steam-market-providers/parser-manager/v)](https://packagist.org/packages/steam-market-providers/parser-manager)
 [![Total Downloads](http://poser.pugx.org/steam-market-providers/parser-manager/downloads)](https://packagist.org/packages/steam-market-providers/parser-manager)
 [![Latest Unstable Version](http://poser.pugx.org/steam-market-providers/parser-manager/v/unstable)](https://packagist.org/packages/steam-market-providers/parser-manager)
