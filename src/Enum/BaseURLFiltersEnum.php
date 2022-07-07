@@ -27,11 +27,9 @@ enum BaseURLFiltersEnum: string
      */
     public function setPage(int $page = 1): string
     {
-        return match($this)
-        {
+        return match ($this) {
             self::Pagination => self::Pagination->value . $page,
             default => throw new InvalidArgumentException('Unexpected match value'),
         };
     }
-
 }

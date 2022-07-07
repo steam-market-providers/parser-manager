@@ -20,7 +20,8 @@ class GuzzleStrategy implements StrategyInterface
      */
     public function __construct(private readonly null|HttpOptions $options = null)
     {
-        print_r($options);die();
+        print_r($options);
+        die();
         $this->client = new Client();
     }
 
@@ -29,5 +30,4 @@ class GuzzleStrategy implements StrategyInterface
         $res = $this->client->get($url);
         return $res->getBody()->getContents();
     }
-
 }

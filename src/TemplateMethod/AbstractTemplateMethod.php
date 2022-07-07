@@ -26,8 +26,6 @@ abstract class AbstractTemplateMethod
         $html = $this->strategy->sendRequest($url->build());
 
         print_r($html);
-
-
     }
 
     abstract protected function createUrl(int $page): SearchUrlBuilder;

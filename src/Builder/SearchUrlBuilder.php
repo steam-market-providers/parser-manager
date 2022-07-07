@@ -73,7 +73,7 @@ class SearchUrlBuilder implements UrlBuilderInterface
             $params[BaseURLFiltersEnum::Language->value] = $this->params->language;
         }
 
-        if(isset($this->params->page)) {
+        if (isset($this->params->page)) {
             $params[BaseURLFiltersEnum::Pagination->value] = BaseURLFiltersEnum::Pagination->setPage($this->params->page);
         }
 

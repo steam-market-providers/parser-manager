@@ -1,8 +1,8 @@
-# Steam market parser
+# Steam parser manager provider
 
 ### Install
 ```bash
-composer require krepysh-spec/steam-market-parser
+composer require steam-market-providers/parser-manager
 ```
 
 
