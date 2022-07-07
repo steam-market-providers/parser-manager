@@ -3,12 +3,12 @@
 use JetBrains\PhpStorm\Pure;
 use KrepyshSpec\SteamEnums\SteamApp;
 use KrepyshSpec\SteamEnums\SteamLanguage;
-use KrepyshSpec\SteamMarketParser\Builder\ParseRulesBuilder;
-use KrepyshSpec\SteamMarketParser\Builder\SearchUrlBuilder;
-use KrepyshSpec\SteamMarketParser\Http\HttpOptions;
-use KrepyshSpec\SteamMarketParser\SteamParserFactory;
-use KrepyshSpec\SteamMarketParser\Http\Strategy\GuzzleStrategy;
-use KrepyshSpec\SteamMarketParser\TemplateMethod\AbstractTemplateMethod;
+use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
+use SteamMarketProviders\ParserManager\Builder\SearchUrlBuilder;
+use SteamMarketProviders\ParserManager\Http\HttpOptions;
+use SteamMarketProviders\ParserManager\SteamParserFactory;
+use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
+use SteamMarketProviders\ParserManager\TemplateMethod\AbstractTemplateMethod;
 
 require_once __DIR__  . '/../vendor/autoload.php';
 

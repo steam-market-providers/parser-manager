@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Builder;
+namespace SteamMarketProviders\ParserManager\Builder;
 
 use stdClass;
 

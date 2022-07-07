@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Exception;
+namespace SteamMarketProviders\ParserManager\Exception;
 
 use Exception;
 

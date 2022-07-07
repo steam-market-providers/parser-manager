@@ -1,6 +1,6 @@
 <?php
 
-namespace KrepyshSpec\SteamMarketParser\Builder;
+namespace SteamMarketProviders\ParserManager\Builder;
 
 use Closure;
 

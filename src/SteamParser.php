@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser;
+namespace SteamMarketProviders\ParserManager;
 
-use KrepyshSpec\SteamMarketParser\TemplateMethod\AbstractTemplateMethod;
-use KrepyshSpec\SteamMarketParser\Contract\StrategyInterface;
+use SteamMarketProviders\ParserManager\TemplateMethod\AbstractTemplateMethod;
+use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 
 final class SteamParser
 {

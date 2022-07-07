@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\TemplateMethod;
+namespace SteamMarketProviders\ParserManager\TemplateMethod;
 
-use KrepyshSpec\SteamMarketParser\Builder\ParseRulesBuilder;
-use KrepyshSpec\SteamMarketParser\Builder\SearchUrlBuilder;
-use KrepyshSpec\SteamMarketParser\Contract\StrategyInterface;
-use KrepyshSpec\SteamMarketParser\Http\Strategy\GuzzleStrategy;
+use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
+use SteamMarketProviders\ParserManager\Builder\SearchUrlBuilder;
+use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
+use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
 
 abstract class AbstractTemplateMethod
 {

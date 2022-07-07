@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Contract;
+namespace SteamMarketProviders\ParserManager\Contract;
 
-use KrepyshSpec\SteamMarketParser\Http\HttpOptions;
+use SteamMarketProviders\ParserManager\Http\HttpOptions;
 
 interface StrategyInterface
 {

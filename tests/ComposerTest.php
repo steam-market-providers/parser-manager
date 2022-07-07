@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Tests;
+namespace SteamMarketProviders\ParserManager\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;

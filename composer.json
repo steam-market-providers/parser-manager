@@ -1,7 +1,7 @@
 {
-    "name": "krepysh-spec/steam-market-parser",
+    "name": "steam-market-providers/parser-manager",
     "type": "library",
-    "homepage": "https://github.com/krepysh-spec/steam-market-parser",
+    "homepage": "https://github.com/steam-market-providers/parser-manager",
     "license": "MIT",
     "description": "",
     "keywords": [
@@ -33,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "KrepyshSpec\\SteamMarketParser\\": "src/"
+            "SteamMarketProviders\\ParserManager\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KrepyshSpec\\SteamMarketParser\\Tests\\": "tests/"
+            "SteamMarketProviders\\ParserManager\\Tests\\": "tests/"
         }
     },
     "scripts": {

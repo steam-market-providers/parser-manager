@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Http;
+namespace SteamMarketProviders\ParserManager\Http;
 
 class HttpOptions
 {

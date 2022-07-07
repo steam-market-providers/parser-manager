@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Enum;
+namespace SteamMarketProviders\ParserManager\Enum;
 
-use KrepyshSpec\SteamMarketParser\Exception\InvalidArgumentException;
+use SteamMarketProviders\ParserManager\Exception\InvalidArgumentException;
 
 enum BaseURLFiltersEnum: string
 {

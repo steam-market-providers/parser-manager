@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Http\Strategy;
+namespace SteamMarketProviders\ParserManager\Http\Strategy;
 
 use GuzzleHttp\Client;
-use KrepyshSpec\SteamMarketParser\Contract\StrategyInterface;
-use KrepyshSpec\SteamMarketParser\Http\HttpOptions;
+use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
+use SteamMarketProviders\ParserManager\Http\HttpOptions;
 
 class GuzzleStrategy implements StrategyInterface
 {

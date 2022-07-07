@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Contract;
+namespace SteamMarketProviders\ParserManager\Contract;
 
-use KrepyshSpec\SteamMarketParser\SteamParser;
+use SteamMarketProviders\ParserManager\SteamParser;
 
 interface FactoryInterface
 {

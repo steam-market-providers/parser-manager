@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Contract;
+namespace SteamMarketProviders\ParserManager\Contract;
 
 use KrepyshSpec\SteamEnums\SteamApp;
 use KrepyshSpec\SteamEnums\SteamLanguage;

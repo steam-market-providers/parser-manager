@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace KrepyshSpec\SteamMarketParser\Builder;
+namespace SteamMarketProviders\ParserManager\Builder;
 
 use KrepyshSpec\SteamEnums\SteamApp;
 use KrepyshSpec\SteamEnums\SteamLanguage;
-use KrepyshSpec\SteamMarketParser\Enum\SteamConfigEnum;
-use KrepyshSpec\SteamMarketParser\Enum\BaseURLFiltersEnum;
-use KrepyshSpec\SteamMarketParser\Exception\BuilderNotSetParamException;
-use KrepyshSpec\SteamMarketParser\Exception\InvalidArgumentException;
-use KrepyshSpec\SteamMarketParser\Contract\UrlBuilderInterface;
+use SteamMarketProviders\ParserManager\Enum\SteamConfigEnum;
+use SteamMarketProviders\ParserManager\Enum\BaseURLFiltersEnum;
+use SteamMarketProviders\ParserManager\Exception\BuilderNotSetParamException;
+use SteamMarketProviders\ParserManager\Exception\InvalidArgumentException;
+use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
 use stdClass;
 
 class SearchUrlBuilder implements UrlBuilderInterface
