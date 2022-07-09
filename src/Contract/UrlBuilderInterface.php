@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Contract;
 
-use KrepyshSpec\SteamEnums\SteamApp;
-use KrepyshSpec\SteamEnums\SteamLanguage;
+use SteamMarketProviders\Enums\SteamApp;
+use SteamMarketProviders\Enums\SteamLanguage;
 
 interface UrlBuilderInterface
 {

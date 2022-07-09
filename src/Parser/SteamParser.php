@@ -18,7 +18,6 @@ final class SteamParser
      */
     public function __construct(private AbstractProvider $abstractProvider)
     {
-
     }
 
     /**

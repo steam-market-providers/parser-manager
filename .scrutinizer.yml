@@ -1,0 +1,19 @@
+build:
+  environment:
+    php:
+      version: '8.1'
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+    coverage:
+      dependencies:
+        before:
+          - sudo apt update -y
+      tests:
+        override:
+          - command: XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-clover coverage.xml
+            coverage:
+              file: coverage.xml
+              format: clover

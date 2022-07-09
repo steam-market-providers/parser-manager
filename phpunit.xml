@@ -6,7 +6,7 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="krepysh-spec/steam-market-parser">
+        <testsuite name="steam-market-providers/parser-manager">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
