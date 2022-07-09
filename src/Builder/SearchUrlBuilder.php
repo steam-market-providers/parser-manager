@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Builder;
 
-use KrepyshSpec\SteamEnums\SteamApp;
-use KrepyshSpec\SteamEnums\SteamLanguage;
+use SteamMarketProviders\Enums\SteamApp;
+use SteamMarketProviders\Enums\SteamLanguage;
 use SteamMarketProviders\ParserManager\Enum\SteamConfigEnum;
 use SteamMarketProviders\ParserManager\Enum\BaseURLFiltersEnum;
 use SteamMarketProviders\ParserManager\Exception\BuilderNotSetParamException;
