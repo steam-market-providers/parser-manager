@@ -12,9 +12,10 @@ use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 final class SteamParser
 {
     private null|StrategyInterface $strategy = null;
-    private ParseRulesBuilder $parseRulesBuilder;
-    private UrlBuilderInterface $urlBuilder;
 
+    /**
+     * @param AbstractProvider $abstractProvider
+     */
     public function __construct(private AbstractProvider $abstractProvider)
     {
 
@@ -46,9 +47,21 @@ final class SteamParser
         return $this->abstractProvider;
     }
 
+    /**
+     * @param ParseRulesBuilder $parseRulesBuilder
+     * @return $this
+     */
     public function setParseRules(ParseRulesBuilder $parseRulesBuilder): SteamParser
     {
-        $this->parseRulesBuilder = $parseRulesBuilder;
+        $this->abstractProvider->setParseRules($parseRulesBuilder);
+
+        return $this;
+    }
+
+    public function setUrl(UrlBuilderInterface $urlBuilder): SteamParser
+    {
+        $this->abstractProvider->setUrl($urlBuilder);
+
         return $this;
     }
 

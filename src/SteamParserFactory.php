@@ -10,6 +10,10 @@ use SteamMarketProviders\ParserManager\Parser\SteamParser;
 
 final class SteamParserFactory implements FactoryInterface
 {
+    /**
+     * @param AbstractProvider $abstractProvider
+     * @return SteamParser
+     */
     public static function create(AbstractProvider $abstractProvider): SteamParser
     {
         return new SteamParser($abstractProvider);
