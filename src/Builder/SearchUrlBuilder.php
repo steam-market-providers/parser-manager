@@ -8,7 +8,8 @@ use SteamMarketProviders\Enums\SteamApp;
 use SteamMarketProviders\Enums\SteamCurrency;
 use SteamMarketProviders\Enums\SteamLanguage;
 use SteamMarketProviders\ParserManager\Enum\SteamConfigEnum;
-use SteamMarketProviders\ParserManager\Enum\BaseURLFiltersEnum;
+use SteamMarketProviders\ParserManager\Enum\URLFiltersEnum;
+use SteamMarketProviders\ParserManager\Enum\URLPaginationEnum;
 use SteamMarketProviders\ParserManager\Exception\BuilderNotSetParamException;
 use SteamMarketProviders\ParserManager\Exception\InvalidArgumentException;
 use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
@@ -16,8 +17,14 @@ use stdClass;
 
 class SearchUrlBuilder implements UrlBuilderInterface
 {
+    /**
+     * @var stdClass
+     */
     protected stdClass $params;
 
+    /**
+     * @return void
+     */
     protected function reset(): void
     {
         $this->params = new stdClass();
@@ -71,31 +78,45 @@ class SearchUrlBuilder implements UrlBuilderInterface
     }
 
     /**
+     * @param int $count
+     * @return UrlBuilderInterface
+     * @throws BuilderNotSetParamException
+     */
+    public function setCount(int $count = 10): UrlBuilderInterface
+    {
+        $this->checkIfAppIdNotEmpty();
+        $this->params->count = $count;
+
+        return $this;
+    }
+
+    /**
      * @return string
      * @throws InvalidArgumentException
      */
     public function build(): string
     {
         $url = SteamConfigEnum::MarketSearchUrl->value;
-        $url .= '/search?';
 
         $params = [];
 
-        $params[BaseURLFiltersEnum::AppId->value] = $this->params->appId;
+        $params[URLFiltersEnum::AppId->value] = $this->params->appId;
 
         if (isset($this->params->language)) {
-            $params[BaseURLFiltersEnum::Language->value] = $this->params->language;
+            $params[URLFiltersEnum::Language->value] = $this->params->language;
         }
 
         if (isset($this->params->currency)) {
-            $params[BaseURLFiltersEnum::Currency->value] = $this->params->currency;
+            $params[URLFiltersEnum::Currency->value] = $this->params->currency;
         }
 
-        if (isset($this->params->page)) {
-            $params[BaseURLFiltersEnum::Pagination->value] = BaseURLFiltersEnum::Pagination->setPage($this->params->page);
+        if (isset($this->params->page) && isset($this->params->count)) {
+            $params[] = URLPaginationEnum::Start->paginate($this->params->page, $this->params->count);
         }
 
+        $url .= '?';
         $url .= http_build_query($params);
+
         return $url;
     }
 

@@ -6,6 +6,6 @@ namespace SteamMarketProviders\ParserManager\Enum;
 
 enum SteamConfigEnum: string
 {
-    case MarketSearchUrl = "https://steamcommunity.com/market/search";
+    case MarketSearchUrl = "https://steamcommunity.com/market/search/render";
     case MarketListingUrl = "https://steamcommunity.com/market/listings";
 }

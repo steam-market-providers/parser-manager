@@ -6,7 +6,8 @@ namespace SteamMarketProviders\ParserManager\Http\Strategy;
 
 use GuzzleHttp\Client;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
-use SteamMarketProviders\ParserManager\Http\HttpOptions;
+use SteamMarketProviders\ParserManager\Http\Options;
+use SteamMarketProviders\ParserManager\Http\Response;
 
 class GuzzleStrategy implements StrategyInterface
 {
@@ -16,16 +17,22 @@ class GuzzleStrategy implements StrategyInterface
     private Client $client;
 
     /**
-     * @param HttpOptions|null $options
+     * @param Options|null $options
      */
-    public function __construct(private readonly null|HttpOptions $options = null)
+    public function __construct(private readonly null|Options $options = null)
     {
         $this->client = new Client();
     }
 
-    public function sendRequest(string $url): string
+    public function sendRequest(string $url): Response
     {
-        $res = $this->client->get($url);
-        return $res->getBody()->getContents();
+       // $res = $this->client->get( $url, ['proxy' => "socks4://80.241.44.34:5678"]);
+        $response = $this->client->get($url);
+
+        return new Response(
+            $response->getStatusCode(),
+            $response->getHeaders(),
+            json_decode($response->getBody()->getContents())
+        );
     }
 }

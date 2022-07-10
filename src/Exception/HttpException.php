@@ -6,6 +6,7 @@ namespace SteamMarketProviders\ParserManager\Exception;
 
 use Exception;
 
-final class GamePlatformException extends Exception
+class HttpException extends Exception
 {
+
 }

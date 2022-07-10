@@ -35,6 +35,12 @@ interface UrlBuilderInterface
     public function setPage(int $page): UrlBuilderInterface;
 
     /**
+     * @param int $count
+     * @return UrlBuilderInterface
+     */
+    public function setCount(int $count = 10): UrlBuilderInterface;
+
+    /**
      * @return string
      */
     public function build(): string;

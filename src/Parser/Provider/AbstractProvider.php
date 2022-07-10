@@ -14,7 +14,9 @@ use PHPHtmlParser\Exceptions\StrictException;
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
+use SteamMarketProviders\ParserManager\Exception\HttpException;
 use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
+use Throwable;
 
 abstract class AbstractProvider
 {
@@ -84,25 +86,49 @@ abstract class AbstractProvider
             $this->parseRulesBuilder = $this->createParseRules();
         }
 
-        return $this->doParseRequest();
+        $response = $this->doParseRequest();
+        return $this->parseHtml($response);
 
     }
 
+    private function doParseRequest(): string
+    {
+        try {
+            $response = $this->strategy->sendRequest($this->urlBuilder->build());
+
+            $code = $response->getStatus();
+            if ($code !== 200) {
+                throw new HttpException("");
+            }
+
+            $response = $response->getBody();
+
+            if (!$response->success) {
+                throw new HttpException("");
+            }
+
+        } catch (Throwable $throwable) {
+            throw new HttpException($throwable->getMessage());
+        }
+
+        return $response->results_html;
+    }
+
     /**
+     * @param string $html
+     * @return array
      * @throws ChildNotFoundException
-     * @throws NotLoadedException
-     * @throws ContentLengthException
      * @throws CircularException
+     * @throws ContentLengthException
      * @throws LogicalException
+     * @throws NotLoadedException
      * @throws StrictException
      */
-    private function doParseRequest(): array
+    private function parseHtml(string $html): array
     {
-        $html = $this->strategy->sendRequest($this->urlBuilder->build());
-
         $this->dom->loadStr($html);
 
-        $contents = $this->dom->find('#searchResultsRows .market_listing_row_link');
+        $contents = $this->dom->find('.market_listing_row_link');
 
         $data = [];
 

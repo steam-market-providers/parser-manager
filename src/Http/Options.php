@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Http;
 
-class HttpOptions
+class Options
 {
     /**
      * @var string|null
@@ -25,7 +25,7 @@ class HttpOptions
      * @param string $userAgent
      * @return $this
      */
-    public function setUserAgent(string $userAgent): HttpOptions
+    public function setUserAgent(string $userAgent): Options
     {
         $this->userAgent = $userAgent;
 
@@ -44,7 +44,7 @@ class HttpOptions
      * @param int $timeout
      * @return $this
      */
-    public function setTimeout(int $timeout): HttpOptions
+    public function setTimeout(int $timeout): Options
     {
         $this->timeout = $timeout;
 
@@ -63,7 +63,7 @@ class HttpOptions
      * @param string $proxy
      * @return $this
      */
-    public function setProxy(string $proxy): HttpOptions
+    public function setProxy(string $proxy): Options
     {
         $this->proxy = $proxy;
 
@@ -80,10 +80,10 @@ class HttpOptions
 
 
     /**
-     * @param HttpOptions $options
+     * @param Options $options
      * @return $this
      */
-    public function setFromOptions(HttpOptions $options): HttpOptions
+    public function setFromOptions(Options $options): Options
     {
         return $this->setUserAgent($options->getUserAgent())
             ->setTimeout($options->getTimeout())
