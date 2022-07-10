@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SteamMarketProviders\ParserManager\Builder;
 
 use SteamMarketProviders\Enums\SteamApp;
+use SteamMarketProviders\Enums\SteamCurrency;
 use SteamMarketProviders\Enums\SteamLanguage;
 use SteamMarketProviders\ParserManager\Enum\SteamConfigEnum;
 use SteamMarketProviders\ParserManager\Enum\BaseURLFiltersEnum;
@@ -46,6 +47,19 @@ class SearchUrlBuilder implements UrlBuilderInterface
     }
 
     /**
+     * @param SteamCurrency $steamCurrency
+     * @return UrlBuilderInterface
+     * @throws BuilderNotSetParamException
+     */
+    public function setCurrency(SteamCurrency $steamCurrency = SteamCurrency::USD): UrlBuilderInterface
+    {
+        $this->checkIfAppIdNotEmpty();
+        $this->params->currency = $steamCurrency->value;
+
+        return $this;
+    }
+
+    /**
      * @throws BuilderNotSetParamException
      */
     public function setPage(int $page = 1): UrlBuilderInterface
@@ -71,6 +85,10 @@ class SearchUrlBuilder implements UrlBuilderInterface
 
         if (isset($this->params->language)) {
             $params[BaseURLFiltersEnum::Language->value] = $this->params->language;
+        }
+
+        if (isset($this->params->currency)) {
+            $params[BaseURLFiltersEnum::Currency->value] = $this->params->currency;
         }
 
         if (isset($this->params->page)) {

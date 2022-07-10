@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Parser\Provider;
 
+use PHPHtmlParser\Dom;
+use PHPHtmlParser\Exceptions\ChildNotFoundException;
+use PHPHtmlParser\Exceptions\CircularException;
+use PHPHtmlParser\Exceptions\ContentLengthException;
+use PHPHtmlParser\Exceptions\LogicalException;
+use PHPHtmlParser\Exceptions\NotLoadedException;
+use PHPHtmlParser\Exceptions\StrictException;
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
@@ -22,6 +29,11 @@ abstract class AbstractProvider
     private null|UrlBuilderInterface $urlBuilder = null;
 
     /**
+     * @var Dom
+     */
+    private Dom $dom;
+
+    /**
      * @param StrategyInterface|null $strategy
      */
     public function __construct(private null|StrategyInterface $strategy = null)
@@ -29,6 +41,8 @@ abstract class AbstractProvider
         if (!$this->strategy) {
             $this->strategy = new GuzzleStrategy();
         }
+
+        $this->dom = new Dom();
     }
 
     /**
@@ -60,7 +74,7 @@ abstract class AbstractProvider
         $this->parseRulesBuilder = $parseRulesBuilder;
     }
 
-    final public function start(int $page)
+    final public function start(int $page): array
     {
         if (!$this->urlBuilder) {
             $this->urlBuilder = $this->createUrl($page);
@@ -70,8 +84,40 @@ abstract class AbstractProvider
             $this->parseRulesBuilder = $this->createParseRules();
         }
 
+        return $this->doParseRequest();
+
+    }
+
+    /**
+     * @throws ChildNotFoundException
+     * @throws NotLoadedException
+     * @throws ContentLengthException
+     * @throws CircularException
+     * @throws LogicalException
+     * @throws StrictException
+     */
+    private function doParseRequest(): array
+    {
         $html = $this->strategy->sendRequest($this->urlBuilder->build());
 
-        print_r($html);
+        $this->dom->loadStr($html);
+
+        $contents = $this->dom->find('#searchResultsRows .market_listing_row_link');
+
+        $data = [];
+
+        foreach ($contents as $row) {
+            $link = $row->getAttribute('href');
+            $name = $row->find('.market_listing_item_name_block > span');
+            $prices = $row->find('.market_listing_their_price .normal_price span');
+
+            $data[] = [
+                'link'=> $link,
+                'name' => $name->innerHtml,
+                'price' => $prices->innerHtml
+            ];
+        }
+
+        return $data;
     }
 }

@@ -11,6 +11,9 @@ use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 
 final class SteamParser
 {
+    /**
+     * @var StrategyInterface|null
+     */
     private null|StrategyInterface $strategy = null;
 
     /**
@@ -66,9 +69,9 @@ final class SteamParser
 
     /**
      * @param int $page
-     * @return void
+     * @return array
      */
-    public function run(int $page = 1)
+    public function run(int $page = 1): array
     {
         return $this->abstractProvider->start($page);
     }

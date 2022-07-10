@@ -11,6 +11,7 @@ enum BaseURLFiltersEnum: string
     case AppId  = 'appid';
     case Search = "q";
     case Language = "l";
+    case Currency = 'currency';
 
     case Pagination = "p";
     case PaginationWithNameASC = "name_asc";
