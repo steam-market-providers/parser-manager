@@ -7,14 +7,14 @@ namespace SteamMarketProviders\ParserManager\Http;
 class Options
 {
     /**
-     * @var string|null
+     * @var float
      */
-    private null|string $userAgent;
+    private float $timeout = 6.00;
 
     /**
-     * @var int
+     * @var float
      */
-    private int $timeout;
+    private float $connectTimeout = 6.00;
 
     /**
      * @var string|null
@@ -22,29 +22,10 @@ class Options
     private null|string $proxy;
 
     /**
-     * @param string $userAgent
+     * @param float $timeout
      * @return $this
      */
-    public function setUserAgent(string $userAgent): Options
-    {
-        $this->userAgent = $userAgent;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUserAgent(): null|string
-    {
-        return $this->userAgent;
-    }
-
-    /**
-     * @param int $timeout
-     * @return $this
-     */
-    public function setTimeout(int $timeout): Options
+    public function setTimeout(float $timeout): Options
     {
         $this->timeout = $timeout;
 
@@ -52,11 +33,30 @@ class Options
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getTimeout(): int
+    public function getTimeout(): float
     {
         return $this->timeout;
+    }
+
+    /**
+     * @param $connectTimeout
+     * @return $this
+     */
+    public function setConnectTimeout($connectTimeout): Options
+    {
+        $this->connectTimeout = $connectTimeout;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getConnectTimeout(): float
+    {
+        return $this->connectTimeout;
     }
 
     /**
@@ -85,8 +85,30 @@ class Options
      */
     public function setFromOptions(Options $options): Options
     {
-        return $this->setUserAgent($options->getUserAgent())
-            ->setTimeout($options->getTimeout())
+        return $this->setTimeout($options->getTimeout())
+            ->setConnectTimeout($options->getConnectTimeout())
             ->setProxy($options->getProxy());
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $options = [];
+
+        if ($this->getTimeout()) {
+            $options['timeout'] = $this->getTimeout();
+        }
+
+        if ($this->getConnectTimeout()) {
+            $options['connect_timeout'] = $this->getConnectTimeout();
+        }
+
+        if ($this->getProxy()) {
+            $options['proxy'] = $this->getProxy();
+        }
+
+        return $options;
     }
 }

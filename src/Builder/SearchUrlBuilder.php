@@ -111,7 +111,8 @@ class SearchUrlBuilder implements UrlBuilderInterface
         }
 
         if (isset($this->params->page) && isset($this->params->count)) {
-            $params[] = URLPaginationEnum::Start->paginate($this->params->page, $this->params->count);
+            $params[URLPaginationEnum::Start->value] = URLPaginationEnum::Start->calculate($this->params->page, $this->params->count);
+            $params[URLPaginationEnum::Count->value] = $this->params->count;
         }
 
         $url .= '?';

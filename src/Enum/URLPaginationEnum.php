@@ -15,13 +15,13 @@ enum URLPaginationEnum: string implements PaginationInterface
     /**
      * @param int $page
      * @param int $count
-     * @return string[]
+     * @return int
      * @throws InvalidArgumentException
      */
-    public function paginate(int $page = 1, int $count = 10): array
+    public function calculate(int $page = 1, int $count = 10): int
     {
         return match ($this) {
-            self::Start => [self::Start->value => $page * $count, self::Count->value => $count],
+            self::Start => $page * $count,
             default => throw new InvalidArgumentException('Unexpected match value'),
         };
     }

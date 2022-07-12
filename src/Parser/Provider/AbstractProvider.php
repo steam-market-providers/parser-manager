@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SteamMarketProviders\ParserManager\Parser\Provider;
 
+use Fiber;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
 use PHPHtmlParser\Exceptions\CircularException;
@@ -11,12 +12,12 @@ use PHPHtmlParser\Exceptions\ContentLengthException;
 use PHPHtmlParser\Exceptions\LogicalException;
 use PHPHtmlParser\Exceptions\NotLoadedException;
 use PHPHtmlParser\Exceptions\StrictException;
+use stdClass;
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
 use SteamMarketProviders\ParserManager\Exception\HttpException;
-use SteamMarketProviders\ParserManager\Http\Strategy\GuzzleStrategy;
-use Throwable;
+use SteamMarketProviders\ParserManager\Http\Http;
 
 abstract class AbstractProvider
 {
@@ -33,17 +34,16 @@ abstract class AbstractProvider
     /**
      * @var Dom
      */
-    private Dom $dom;
+    private readonly Dom $dom;
 
     /**
-     * @param StrategyInterface|null $strategy
+     * @var Http
      */
-    public function __construct(private null|StrategyInterface $strategy = null)
-    {
-        if (!$this->strategy) {
-            $this->strategy = new GuzzleStrategy();
-        }
+    private readonly Http $http;
 
+    public function __construct()
+    {
+        $this->http = new Http();
         $this->dom = new Dom();
     }
 
@@ -76,6 +76,26 @@ abstract class AbstractProvider
         $this->parseRulesBuilder = $parseRulesBuilder;
     }
 
+    /**
+     * @param StrategyInterface $strategy
+     * @return $this
+     */
+    public function setHttpStrategy(StrategyInterface $strategy): AbstractProvider
+    {
+        $this->http->setStrategy($strategy);
+
+        return $this;
+    }
+
+    /**
+     * @throws HttpException
+     * @throws ChildNotFoundException
+     * @throws CircularException
+     * @throws StrictException
+     * @throws NotLoadedException
+     * @throws ContentLengthException
+     * @throws LogicalException
+     */
     final public function start(int $page): array
     {
         if (!$this->urlBuilder) {
@@ -86,32 +106,8 @@ abstract class AbstractProvider
             $this->parseRulesBuilder = $this->createParseRules();
         }
 
-        $response = $this->doParseRequest();
+        $response = $this->http->sendRequest($this->urlBuilder->build());
         return $this->parseHtml($response);
-
-    }
-
-    private function doParseRequest(): string
-    {
-        try {
-            $response = $this->strategy->sendRequest($this->urlBuilder->build());
-
-            $code = $response->getStatus();
-            if ($code !== 200) {
-                throw new HttpException("");
-            }
-
-            $response = $response->getBody();
-
-            if (!$response->success) {
-                throw new HttpException("");
-            }
-
-        } catch (Throwable $throwable) {
-            throw new HttpException($throwable->getMessage());
-        }
-
-        return $response->results_html;
     }
 
     /**
@@ -124,9 +120,9 @@ abstract class AbstractProvider
      * @throws NotLoadedException
      * @throws StrictException
      */
-    private function parseHtml(string $html): array
+    private function parseHtml(stdClass $html): array
     {
-        $this->dom->loadStr($html);
+        $this->dom->loadStr($html->results_html);
 
         $contents = $this->dom->find('.market_listing_row_link');
 
@@ -144,6 +140,26 @@ abstract class AbstractProvider
             ];
         }
 
+        $this->parseSingleItem($data);
+
         return $data;
+    }
+
+    private function parseSingleItem(array &$data): void
+    {
+        foreach ($data as $name => $info) {
+            $response = $this->http->sendRequest($info['link']);
+            $response = $response->results_html;
+
+            $this->dom->loadStr($response);
+
+            $data[$name]['info'] = [];
+            $wrapper = $this->dom->find('.market_listing_iteminfo');
+
+            $data[$name]['info']['large_image'] = $wrapper->find('.market_listing_largeimage > img')->getAttribute('src');
+        }
+
+        var_dump($data);
+        die();
     }
 }

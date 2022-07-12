@@ -8,7 +8,6 @@ use SteamMarketProviders\ParserManager\Contract\Http\ResponseInterface;
 
 class Response extends AbstractMessage implements ResponseInterface
 {
-
     /**
      * This is the list of currently registered HTTP status codes.
      *

@@ -9,7 +9,7 @@ interface PaginationInterface
     /**
      * @param int $page
      * @param int $count
-     * @return array
+     * @return int
      */
-    public function paginate(int $page = 1, int $count = 10): array;
+    public function calculate(int $page = 1, int $count = 10): int;
 }
