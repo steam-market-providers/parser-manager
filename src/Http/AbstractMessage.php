@@ -15,7 +15,7 @@ abstract class AbstractMessage implements MessageInterface
      *
      * @var resource|string|callable
      */
-    protected  $body;
+    protected $body;
 
     /**
      * Contains the list of HTTP headers.

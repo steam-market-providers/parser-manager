@@ -105,7 +105,10 @@ abstract class AbstractProvider
             $this->parseRulesBuilder = $this->createParseRules();
         }
 
-        $response = $this->http->sendRequest($this->urlBuilder->build());
+        $response = $this->http
+            ->setUrl($this->urlBuilder->build())
+            ->sendRequest();
+
         return $this->parseHtml($response);
     }
 
@@ -147,8 +150,8 @@ abstract class AbstractProvider
     private function parseSingleItem(array &$data): void
     {
         foreach ($data as $name => $info) {
-            $url = "https://steamcommunity.com/market/listings/730/" . $info['name'] . "/render?start=0&count=1&currency=1&format=json";
-            $response = $this->http->sendRequest($url);
+            $url = "https://steamcommunity.com/market/listings/730/" . urlencode($info['name']) . "/render?start=0&count=1&currency=1&format=json";
+            $response = $this->http->setUrl($url)->sendRequest();
             $data['results_html'] = $response->results_html;
             $data['app_data'] = $response->app_data;
             $data['assets'] = $response->assets;

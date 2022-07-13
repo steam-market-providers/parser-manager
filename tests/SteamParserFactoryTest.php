@@ -15,20 +15,11 @@ class SteamParserFactoryTest extends TestCase
 {
     private AbstractProvider $abstractProvider;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
-        $this->abstractProvider = new class extends AbstractProvider {
-
-            /**
-             * @param int $page
-             * @return UrlBuilderInterface
-             */
+        $this->abstractProvider = new class () extends AbstractProvider {
             protected function createUrl(int $page): UrlBuilderInterface
             {
-                // TODO: Implement createUrl() method.
             }
 
             /**
@@ -36,14 +27,13 @@ class SteamParserFactoryTest extends TestCase
              */
             protected function createParseRules(): ParseRulesBuilder
             {
-                // TODO: Implement createParseRules() method.
             }
         };
     }
 
     public function testSuccessCreating(): void
     {
-         $result = SteamParserFactory::create($this->abstractProvider);
-         $this->assertInstanceOf(SteamParser::class, $result);
+        $result = SteamParserFactory::create($this->abstractProvider);
+        $this->assertInstanceOf(SteamParser::class, $result);
     }
 }
