@@ -13,7 +13,6 @@ use PHPHtmlParser\Exceptions\StrictException;
 use SteamMarketProviders\ParserManager\Builder\ParseRulesBuilder;
 use SteamMarketProviders\ParserManager\Contract\UrlBuilderInterface;
 use SteamMarketProviders\ParserManager\Exception\HttpException;
-use SteamMarketProviders\ParserManager\Parser\Provider\AbstractProvider;
 use SteamMarketProviders\ParserManager\Contract\StrategyInterface;
 
 final class SteamParser

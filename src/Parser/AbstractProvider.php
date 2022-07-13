@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace SteamMarketProviders\ParserManager\Parser\Provider;
+namespace SteamMarketProviders\ParserManager\Parser;
 
-use Fiber;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
 use PHPHtmlParser\Exceptions\CircularException;
@@ -148,18 +147,19 @@ abstract class AbstractProvider
     private function parseSingleItem(array &$data): void
     {
         foreach ($data as $name => $info) {
-            $response = $this->http->sendRequest($info['link']);
-            $response = $response->results_html;
-
-            $this->dom->loadStr($response);
-
-            $data[$name]['info'] = [];
-            $wrapper = $this->dom->find('.market_listing_iteminfo');
-
-            $data[$name]['info']['large_image'] = $wrapper->find('.market_listing_largeimage > img')->getAttribute('src');
+            $url = "https://steamcommunity.com/market/listings/730/" . $info['name'] . "/render?start=0&count=1&currency=1&format=json";
+            $response = $this->http->sendRequest($url);
+            $data['results_html'] = $response->results_html;
+            $data['app_data'] = $response->app_data;
+            $data['assets'] = $response->assets;
+//            $response = $response->results_html;
+//
+//            $this->dom->loadStr($response);
+//
+//            $data[$name]['info'] = [];
+//            $wrapper = $this->dom->find('.market_listing_iteminfo');
+//
+//            $data[$name]['info']['large_image'] = $wrapper->find('.market_listing_largeimage > img')->getAttribute('src');
         }
-
-        var_dump($data);
-        die();
     }
 }

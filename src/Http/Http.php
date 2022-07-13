@@ -33,12 +33,12 @@ final class Http
         return $this;
     }
 
+    /**
+     * @param string $url
+     * @return stdClass
+     * @throws HttpException
+     */
     public function sendRequest(string $url): stdClass
-    {
-        return $this->handlerRequest($url);
-    }
-
-    private function handlerRequest(string $url): stdClass
     {
         try {
             $response = $this->strategy->sendRequest($url);

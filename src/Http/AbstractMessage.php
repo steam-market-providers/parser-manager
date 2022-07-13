@@ -15,21 +15,21 @@ abstract class AbstractMessage implements MessageInterface
      *
      * @var resource|string|callable
      */
-    protected $body;
+    protected  $body;
 
     /**
      * Contains the list of HTTP headers.
      *
      * @var array
      */
-    protected $headers = [];
+    protected array $headers = [];
 
     /**
      * HTTP message version (1.0, 1.1 or 2.0).
      *
      * @var string
      */
-    protected $httpVersion = '1.1';
+    protected string $httpVersion = '1.1';
 
     /**
      * Returns the body as a readable stream resource.
@@ -148,7 +148,7 @@ abstract class AbstractMessage implements MessageInterface
      *
      * @return string|null
      */
-    public function getHeader(string $name)
+    public function getHeader(string $name): null|string
     {
         $name = strtolower($name);
 
